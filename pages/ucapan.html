@@ -66,7 +66,7 @@
 <script type="module">
    // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -89,15 +89,27 @@
     let params = new URLSearchParams(window.location.search);
     let id = params.get("id");
 
-    (async () => {
-        let docSnap = await getDoc(doc(db, "ucapan", id));
-        if (docSnap.exists()) {
-            document.getElementById("namaUcapan").innerText = docSnap.data().nama;
-            document.getElementById("pesanUcapan").innerText = docSnap.data().pesan;
-        } else {
-            document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
-        }
-    })();
+    if (!id) {
+        document.body.innerHTML = "<h1>Error: ID tidak ditemukan!</h1>";
+    } else {
+        // Ambil data dari Firestore
+        (async () => {
+            try {
+                let docRef = doc(db, "ucapan", id);
+                let docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    document.getElementById("namaUcapan").innerText = docSnap.data().nama;
+                    document.getElementById("pesanUcapan").innerText = docSnap.data().pesan;
+                } else {
+                    document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
+                }
+            } catch (error) {
+                console.error("Error mengambil data:", error);
+                document.body.innerHTML = "<h1>Terjadi kesalahan saat mengambil data!</h1>";
+            }
+        })();
+    }
 </script>
 
 </body>
