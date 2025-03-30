@@ -17,15 +17,36 @@
             color: #F6AEBC;
             margin: 0;
             padding: 0;
-        }
-        .container {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            overflow: hidden; /* Mencegah scroll pada body */
         }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            font-size: 2rem;
+            color: white;
+            z-index: 10;
+        }
+        .content-container {
+            position: relative;
+            top: 60px; /* Menyesuaikan dengan header */
+            width: 80%;
+            max-width: 600px;
+            height: 80vh; /* Supaya tetap di dalam viewport */
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+        
         h1 {
             font-size: 3rem;
         }
