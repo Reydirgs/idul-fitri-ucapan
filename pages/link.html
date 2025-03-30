@@ -68,16 +68,11 @@
     </div>
     <script>
         let params = new URLSearchParams(window.location.search);
-        let nama = params.get("nama");
-        let pesan = params.get("pesan");
-
-        if (nama && pesan) {
-            let fullLink = window.location.origin + "/idul-fitri.html?nama=" + nama + "&pesan=" + pesan;
-            document.getElementById("linkTampil").innerText = fullLink;
-        } else {
-            document.getElementById("linkTampil").innerText = "Data tidak ditemukan!";
-        }
-
+        let id = params.get("id");
+        if (id) {
+        document.getElementById("linkTampil").innerText = window.location.origin + "/idul-fitri.html?id=" + id;
+      }
+        
         function copyLink() {
             let textToCopy = document.getElementById("linkTampil").innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
