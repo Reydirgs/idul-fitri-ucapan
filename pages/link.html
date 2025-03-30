@@ -3,20 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
-    <title>Link Ucapan Anda</title>
+    <title>Link Ucapan</title>
     <style>
         body {
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
-            text-shadow: 1px 1px 0px white;
-            background: url('eid-mubarak.jpg') no-repeat center center fixed;
+            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
-            margin: 0;
-            padding: 0;
         }
         .container {
             display: flex;
@@ -26,69 +20,38 @@
             height: 100vh;
             background: rgba(0, 0, 0, 0.3);
         }
-        h1 {
-            font-size: 3rem;
-        }
-        p {
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            word-break: break-all;
-        }
         .button {
-            margin-top: 20px;
             padding: 10px 20px;
             font-size: 1.2rem;
-            color: white;
             background-color: #F6AEBC;
+            color: white;
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-            transition: 0.3s;
             text-decoration: none;
             display: inline-block;
         }
         .button:hover {
-            background-color: #F6AEBC;
             box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-        }
-        #copyStatus {
-            margin-top: 10px;
-            font-size: 1rem;
-            color: yellow;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Link Ucapan Anda</h1>
-    <p id="linkTampil"></p>
-    <button class="button" onclick="copyLink()">Copy Link</button>
-    <p id="copyStatus"></p>
+    <h1>Bagikan Ucapan Anda</h1>
+    <p id="generatedLink"></p>
+    <button onclick="copyLink()">Salin Link</button>
 </div>
 
 <script>
     let params = new URLSearchParams(window.location.search);
     let id = params.get("id");
-
-    if (id) {
-        let fullLink = window.location.origin + "/idul-fitri.html?id=" + id;
-        document.getElementById("linkTampil").innerText = fullLink;
-    } else {
-        document.getElementById("linkTampil").innerText = "ID tidak ditemukan!";
-    }
+    let link = `${window.location.origin}/idul-fitri.html?id=${id}`;
+    document.getElementById("generatedLink").innerText = link;
 
     function copyLink() {
-        let textToCopy = document.getElementById("linkTampil").innerText;
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            document.getElementById("copyStatus").innerText = "Link berhasil disalin!";
-        }).catch(() => {
-            document.getElementById("copyStatus").innerText = "Gagal menyalin link!";
-        });
+        navigator.clipboard.writeText(link).then(() => alert("Link disalin!"));
     }
 </script>
 
