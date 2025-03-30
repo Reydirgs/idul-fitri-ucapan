@@ -94,24 +94,21 @@
   const analytics = getAnalytics(app);
     
     document.getElementById("formUcapan").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        
-        let nama = document.getElementById("nama").value.trim();
-        let pesan = document.getElementById("pesan").value.trim();
+    event.preventDefault();
+    
+    let nama = document.getElementById("nama").value;
+    let pesan = document.getElementById("pesan").value;
 
-        if (!nama || !pesan) {
-            alert("Nama dan pesan tidak boleh kosong!");
-            return;
-        }
+    try {
+        let docRef = await addDoc(collection(db, "ucapan"), { nama, pesan });
+        console.log("Dokumen berhasil ditambahkan dengan ID:", docRef.id);
+        window.location.href = `link.html?id=${docRef.id}`;
+    } catch (error) {
+        console.error("Error menambahkan dokumen:", error);  // Ini akan menampilkan detail error di console
+        alert("Terjadi kesalahan saat menyimpan ucapan. Cek console untuk detail.");
+    }
+});
 
-        try {
-            let docRef = await addDoc(collection(db, "ucapan"), { nama, pesan });
-            window.location.href = `link.html?id=${docRef.id}`;
-        } catch (error) {
-            console.error("Error menambahkan dokumen:", error);
-            alert("Terjadi kesalahan, coba lagi!");
-        }
-    });
 </script>
 
 
