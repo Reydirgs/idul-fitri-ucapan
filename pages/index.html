@@ -91,21 +91,21 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
     
-    document.getElementById("formUcapan").addEventListener("submit", async function(event) {
-    event.preventDefault();
-    
-    let nama = document.getElementById("nama").value;
-    let pesan = document.getElementById("pesan").value;
+     document.getElementById("formUcapan").addEventListener("submit", async function(event) {
+        event.preventDefault();
 
-    try {
-        let docRef = await addDoc(collection(db, "ucapan"), { nama, pesan });
-        console.log("Dokumen berhasil ditambahkan dengan ID:", docRef.id);
-        window.location.href = `link.html?id=${docRef.id}`;
-    } catch (error) {
-        console.error("Error menambahkan dokumen:", error);  // Ini akan menampilkan detail error di console
-        alert("Terjadi kesalahan saat menyimpan ucapan. Cek console untuk detail.");
+        let nama = document.getElementById("nama").value;
+        let pesan = document.getElementById("pesan").value;
+
+        try {
+            let docRef = await addDoc(collection(db, "ucapan"), { nama, pesan });
+            console.log("Dokumen berhasil ditambahkan dengan ID:", docRef.id);
+            window.location.href = `link.html?id=${docRef.id}`;
+        } catch (error) {
+            console.error("Error menambahkan dokumen:", error);
+            alert("Terjadi kesalahan saat menyimpan ucapan. Cek console untuk detail.");
     }
 });
 
