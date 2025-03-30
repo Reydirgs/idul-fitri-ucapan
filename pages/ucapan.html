@@ -87,17 +87,18 @@
   const db = getFirestore(app);
     
     let params = new URLSearchParams(window.location.search);
-    let id = params.get("id");
+        let id = params.get("id");
 
-    (async () => {
-        let docSnap = await getDoc(doc(db, "ucapan", id));
-        if (docSnap.exists()) {
-            document.getElementById("namaUcapan").innerText = docSnap.data().nama;
-            document.getElementById("pesanUcapan").innerText = docSnap.data().pesan;
-        } else {
-            document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
+        if (id) {
+            const docRef = doc(db, "ucapan", id);
+            getDoc(docRef).then(docSnap => {
+                if (docSnap.exists()) {
+                    document.getElementById("ucapan").innerText = docSnap.data().pesan;
+                } else {
+                    document.getElementById("ucapan").innerText = "Ucapan tidak ditemukan!";
+                }
+            });
         }
-    })();
 </script>
 
 </body>
