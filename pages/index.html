@@ -69,8 +69,7 @@
         <button type="submit">Kirim Ucapan</button>
     </form>
 </div>
-
-<script>
+    
     <script>
     document.getElementById("formUcapan").addEventListener("submit", function(event) {
         event.preventDefault();
@@ -79,9 +78,6 @@
         window.location.href = `link.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
     });
 </script>
-
-    });
-</script>
-
+    
 </body>
 </html>
