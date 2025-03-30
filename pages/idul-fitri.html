@@ -66,17 +66,13 @@
     let id = params.get("id");
 
     if (id) {
-        let data = localStorage.getItem(id);
-        if (data) {
-            let { nama, pesan } = JSON.parse(data);
-            document.getElementById("namaUcapan").innerText = nama;
-            document.getElementById("pesanUcapan").innerText = pesan;
-        } else {
-            document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
-        }
+        // Perbaiki link agar mengarah ke ucapan.html dengan ID
+        document.getElementById("linkUcapan").href = "ucapan.html?id=" + id;
+    } else {
+        document.getElementById("linkUcapan").innerText = "Ucapan Tidak Ditemukan!";
+        document.getElementById("linkUcapan").style.pointerEvents = "none"; // Nonaktifkan klik
     }
 </script>
-
 
 </body>
 </html>
