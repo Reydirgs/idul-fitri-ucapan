@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Ucapan Anda</title>
+    <title>Link Ucapan Idul Fitri</title>
     <style>
         body {
-            ont-family: "Sue Ellen Francisco", cursive;
+            font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
             text-shadow: 1px 1px 0px white;
             background: url('eid-mubarak.jpg') no-repeat center center fixed;
@@ -23,6 +23,17 @@
             height: 100vh;
             background: rgba(0, 0, 0, 0.3);
         }
+        h1 {
+            font-size: 3rem;
+        }
+        p {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            word-break: break-word;
+        }
         button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -37,18 +48,7 @@
             text-decoration: none;
             display: inline-block;
         }
-        h1 {
-            font-size: 3rem;
-        }
-         p {
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            display: inline-block;
-            word-break: break-all;
-        }
-        .button:hover {
+        button:hover {
             background-color: #F6AEBC;
             box-shadow: 0 0 20px rgba(255, 255, 255, 1);
         }
@@ -60,35 +60,32 @@
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Berikut Link Ucapan Idul Fitri Anda</h1>
+        <p id="linkTampil"></p>
+        <button onclick="copyLink()">Salin Link</button>
+        <p id="copyStatus"></p>
+    </div>
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let nama = params.get("nama");
+        let pesan = params.get("pesan");
 
-<div class="container">
-    <h1>Bagikan Link Ucapan Anda</h1>
-    <p id="linkTampil"></p>
-    <button onclick="copyLink()">Copy Link</button>
-    <p id="copyStatus"></p>
-</div>
+        if (nama && pesan) {
+            let fullLink = window.location.origin + "/idul-fitri.html?nama=" + nama + "&pesan=" + pesan;
+            document.getElementById("linkTampil").innerText = fullLink;
+        } else {
+            document.getElementById("linkTampil").innerText = "Data tidak ditemukan!";
+        }
 
-<script>
-    let params = new URLSearchParams(window.location.search);
-    let id = params.get("id");
-
-    if (id) {
-        let fullLink = window.location.origin + "/idul-fitri.html?id=" + id;
-        document.getElementById("linkTampil").innerText = fullLink;
-    } else {
-        document.getElementById("linkTampil").innerText = "ID tidak ditemukan!";
-    }
-
-    function copyLink() {
-        let textToCopy = document.getElementById("linkTampil").innerText;
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            document.getElementById("copyStatus").innerText = "Link berhasil disalin!";
-        }).catch(() => {
-            document.getElementById("copyStatus").innerText = "Gagal menyalin link!";
-        });
-    }
-    }
-</script>
-
+        function copyLink() {
+            let textToCopy = document.getElementById("linkTampil").innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                document.getElementById("copyStatus").innerText = "Link berhasil disalin!";
+            }).catch(() => {
+                document.getElementById("copyStatus").innerText = "Gagal menyalin link!";
+            });
+        }
+    </script>
 </body>
 </html>
