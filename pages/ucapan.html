@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -7,13 +6,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
-    <title>Ucapan Idul Fitri</title>
+    <title>Ucapan Idul Fitri Dari Teman</title>
     <style>
         body {
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
             text-shadow: 1px 1px 0px white;
-            background: url('../public/eid-mubarak.jpg') no-repeat center center fixed;
+            background: url('eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
             margin: 0;
@@ -32,6 +31,7 @@
         }
         p {
             font-size: 2rem;
+            margin-top: 10px;
         }
         .back-button {
             margin-top: 20px;
@@ -57,16 +57,18 @@
 
 <div class="container">
     <h1>Taqabbalallahu Minna Wa Minkum</h1>
-    <p id="ucapan"></p> 
-    <a href="../index.html" class="back-button">Kembali</a>
+    <h2 id="namaUcapan"></h2>
+    <p id="pesanUcapan"></p>
+    <a href="index.html" class="back-button">Kembali</a>
 </div>
 
 <script>
     const params = new URLSearchParams(window.location.search);
     const nama = params.get("nama") || "Sahabat";
     const pesan = params.get("pesan") || "Selamat Hari Raya Idul Fitri!";
-    document.getElementById("namaUcapan").innerText = nama;
-    document.getElementById("pesanUcapan").innerText = pesan;
+    
+    document.getElementById("namaUcapan").innerText = "Dari: " + nama;
+    document.getElementById("pesanUcapan").innerText = `"${pesan}"`;
 </script>
 
 </body>
