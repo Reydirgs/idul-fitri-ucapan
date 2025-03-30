@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
     <title>Link Ucapan</title>
     <style>
         body {
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
-            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
+            text-shadow: 1px 1px 0px white;
+            background: url('eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
+            margin: 0;
+            padding: 0;
         }
         .container {
             display: flex;
@@ -20,14 +26,27 @@
             height: 100vh;
             background: rgba(0, 0, 0, 0.3);
         }
+        h1 {
+            font-size: 3rem;
+        }
+        p {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            color: black;
+        }
         .button {
+            margin-top: 20px;
             padding: 10px 20px;
             font-size: 1.2rem;
-            background-color: #F6AEBC;
             color: white;
+            background-color: #F6AEBC;
             border: none;
             cursor: pointer;
             border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            transition: 0.3s;
             text-decoration: none;
             display: inline-block;
         }
@@ -39,19 +58,21 @@
 <body>
 
 <div class="container">
-    <h1>Bagikan Ucapan Anda</h1>
-    <p id="generatedLink"></p>
-    <button onclick="copyLink()">Salin Link</button>
+    <h1>Link Ucapan Anda</h1>
+    <p>Bagikan link ini ke teman atau keluarga:</p>
+    <p><a id="linkUcapan" class="button" target="_blank"></a></p>
 </div>
 
 <script>
     let params = new URLSearchParams(window.location.search);
     let id = params.get("id");
-    let link = `${window.location.origin}/idul-fitri.html?id=${id}`;
-    document.getElementById("generatedLink").innerText = link;
 
-    function copyLink() {
-        navigator.clipboard.writeText(link).then(() => alert("Link disalin!"));
+    if (id) {
+        let link = `${window.location.origin}/idul-fitri.html?id=${id}`;
+        document.getElementById("linkUcapan").href = link;
+        document.getElementById("linkUcapan").innerText = link;
+    } else {
+        document.body.innerHTML = "<h1>Link tidak ditemukan!</h1>";
     }
 </script>
 
