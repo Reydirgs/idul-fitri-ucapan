@@ -70,14 +70,24 @@
     </form>
 </div>
     
-    <script>
+<script>
     document.getElementById("formUcapan").addEventListener("submit", function(event) {
         event.preventDefault();
+        
         let nama = document.getElementById("nama").value;
         let pesan = document.getElementById("pesan").value;
-        window.location.href = `link.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+
+        // Generate kode acak (6 karakter)
+        let idAcak = Math.random().toString(36).substr(2, 6);
+        
+        // Simpan data ke localStorage
+        localStorage.setItem(idAcak, JSON.stringify({ nama, pesan }));
+
+        // Redirect ke link.html dengan ID
+        window.location.href = `link.html?id=${idAcak}`;
     });
 </script>
+
     
 </body>
 </html>
