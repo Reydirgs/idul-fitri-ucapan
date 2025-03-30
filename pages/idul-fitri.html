@@ -12,7 +12,7 @@
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
             text-shadow: 1px 1px 0px white;
-            background: url('eid-mubarak.jpg') no-repeat center center fixed;
+            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
             margin: 0;
@@ -31,48 +31,5 @@
         }
         p {
             font-size: 2rem;
-            margin-top: 10px;
         }
-        .button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            color: white;
-            background-color: #F6AEBC;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .button:hover {
-            background-color: #F6AEBC;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>Selamat Hari Raya Idul Fitri 1446 H</h1>
-    <p>Minal Aidin Wal Faizin, Mohon Maaf Lahir dan Batin &#128591;</p>
-    <a id="linkUcapan" class="button">Lihat Ucapan</a>
-</div>
-
-<script>
-    let params = new URLSearchParams(window.location.search);
-    let id = params.get("id");
-
-    if (id) {
-        document.getElementById("linkUcapan").href = "ucapan.html?id=" + id;
-    } else {
-        document.getElementById("linkUcapan").innerText = "Ucapan Tidak Ditemukan!";
-        document.getElementById("linkUcapan").style.pointerEvents = "none"; 
-    }
-</script>
-
-
-</body>
-</html>
+        .button
