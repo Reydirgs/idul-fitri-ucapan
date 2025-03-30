@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
-    <title>Link Ucapan Idul Fitri</title>
+    <title>Link Ucapan</title>
     <style>
         body {
             font-family: "Sue Ellen Francisco", cursive;
@@ -25,79 +25,63 @@
             align-items: center;
             height: 100vh;
             background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
         }
         h1 {
             font-size: 2.5rem;
         }
-        p {
-            font-size: 1.5rem;
+        .link-box {
             background: rgba(255, 255, 255, 0.7);
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
-            word-break: break-word;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            display: inline-block;
+            word-wrap: break-word;
         }
-        a, button {
-            font-size: 1.5rem;
-            text-decoration: none;
-            background-color: #F6AEBC;
+        .button {
+            margin-top: 15px;
             padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #F6AEBC;
+            border: none;
+            cursor: pointer;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
             transition: 0.3s;
-            display: inline-block;
-            margin-top: 20px;
-            cursor: pointer;
-            border: none;
-            color: white;
         }
-        a:hover, button:hover {
+        .button:hover {
+            background-color: #F6AEBC;
             box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-        }
-        #copyNotif {
-            display: none;
-            margin-top: 10px;
-            font-size: 1.2rem;
-            color: white;
-            background: rgba(0, 128, 0, 0.7);
-            padding: 5px 10px;
-            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Berikut Link Ucapan Idul Fitri Anda</h1>
-    <p id="linkUcapan">Memuat link...</p>
-    <button id="copyBtn">Salin Link</button>
-    <p id="copyNotif">✅ Link berhasil disalin!</p>
+    <h1>Bagikan Ucapan Idul Fitri</h1>
+    <div class="link-box">
+        <p id="generatedLink">Memuat link...</p>
+    </div>
+    <button class="button" onclick="copyLink()">Copy Link</button>
 </div>
 
 <script>
-    // Ambil parameter dari URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const nama = urlParams.get("nama");
-    const pesan = urlParams.get("pesan");
+    // Ambil ID dari URL
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get("id");
 
-    // Buat link ke idul-fitri.html dengan parameter
-    const baseUrl = window.location.origin + "/idul-fitri.html";
-    const linkUcapan = `${baseUrl}?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+    // Buat link tujuan
+    let fullLink = window.location.origin + "/idul-fitri.html?id=" + id;
+    
+    // Tampilkan link
+    document.getElementById("generatedLink").innerText = fullLink;
 
-    // Tampilkan link di halaman
-    document.getElementById("linkUcapan").innerHTML = `<a href="${linkUcapan}" target="_blank">${linkUcapan}</a>`;
-
-    // Tambahkan fungsi untuk menyalin link
-    document.getElementById("copyBtn").addEventListener("click", function() {
-        navigator.clipboard.writeText(linkUcapan).then(() => {
-            document.getElementById("copyNotif").style.display = "block";
-            setTimeout(() => {
-                document.getElementById("copyNotif").style.display = "none";
-            }, 2000);
-        }).catch(err => {
-            console.error("Gagal menyalin link", err);
+    // Fungsi copy link
+    function copyLink() {
+        navigator.clipboard.writeText(fullLink).then(() => {
+            alert("Link telah disalin!");
         });
-    });
+    }
 </script>
 
 </body>
