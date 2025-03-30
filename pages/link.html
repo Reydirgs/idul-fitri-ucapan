@@ -37,8 +37,7 @@
             border-radius: 10px;
             word-break: break-word;
         }
-        a {
-            color: white;
+        a, button {
             font-size: 1.5rem;
             text-decoration: none;
             background-color: #F6AEBC;
@@ -48,9 +47,21 @@
             transition: 0.3s;
             display: inline-block;
             margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            color: white;
         }
-        a:hover {
+        a:hover, button:hover {
             box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+        #copyNotif {
+            display: none;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: white;
+            background: rgba(0, 128, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -59,6 +70,8 @@
 <div class="container">
     <h1>Berikut Link Ucapan Idul Fitri Anda</h1>
     <p id="linkUcapan">Memuat link...</p>
+    <button id="copyBtn">Salin Link</button>
+    <p id="copyNotif">✅ Link berhasil disalin!</p>
 </div>
 
 <script>
@@ -73,6 +86,18 @@
 
     // Tampilkan link di halaman
     document.getElementById("linkUcapan").innerHTML = `<a href="${linkUcapan}" target="_blank">${linkUcapan}</a>`;
+
+    // Tambahkan fungsi untuk menyalin link
+    document.getElementById("copyBtn").addEventListener("click", function() {
+        navigator.clipboard.writeText(linkUcapan).then(() => {
+            document.getElementById("copyNotif").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("copyNotif").style.display = "none";
+            }, 2000);
+        }).catch(err => {
+            console.error("Gagal menyalin link", err);
+        });
+    });
 </script>
 
 </body>
