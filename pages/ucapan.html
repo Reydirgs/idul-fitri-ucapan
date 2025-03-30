@@ -6,13 +6,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
-    <title>Ucapan Idul Fitri Dari Teman</title>
+    <title>Ucapan Idul Fitri</title>
     <style>
         body {
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
             text-shadow: 1px 1px 0px white;
-            background: url('eid-mubarak.jpg') no-repeat center center fixed;
+            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
             margin: 0;
@@ -31,9 +31,12 @@
         }
         p {
             font-size: 2rem;
-            margin-top: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
-        .back-button {
+        .button {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 1.2rem;
@@ -47,8 +50,7 @@
             text-decoration: none;
             display: inline-block;
         }
-        .back-button:hover {
-            background-color: #F6AEBC;
+        .button:hover {
             box-shadow: 0 0 20px rgba(255, 255, 255, 1);
         }
     </style>
@@ -56,33 +58,40 @@
 <body>
 
 <div class="container">
-    <h1>Taqabbalallahu Minna Wa Minkum</h1>
-    <h2 id="namaUcapan"></h2>
+    <h1>Ucapan Dari <span id="namaUcapan"></span></h1>
     <p id="pesanUcapan"></p>
-    <a href="idul-fitri.html" class="back-button">Kembali</a>
+    <a href="idul-fitri.html" class="button">Kembali</a>
 </div>
-    
-<script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
     let params = new URLSearchParams(window.location.search);
     let id = params.get("id");
 
-    if (id) {
-        let data = localStorage.getItem(id);
-        if (data) {
-            let { nama, pesan } = JSON.parse(data);
-            document.getElementById("namaUcapan").innerText = nama;
-            document.getElementById("pesanUcapan").innerText = pesan;
+    (async () => {
+        let docSnap = await getDoc(doc(db, "ucapan", id));
+        if (docSnap.exists()) {
+            document.getElementById("namaUcapan").innerText = docSnap.data().nama;
+            document.getElementById("pesanUcapan").innerText = docSnap.data().pesan;
         } else {
             document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
         }
-    }
-
-    // Tombol kembali ke idul-fitri.html
-    document.getElementById("btnBack").onclick = function() {
-        window.location.href = "idul-fitri.html?id=" + id;
-    };
+    })();
 </script>
-
 
 </body>
 </html>
