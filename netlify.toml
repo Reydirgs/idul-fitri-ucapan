@@ -6,4 +6,7 @@
   from = "/"
   to = "/pages/index.html"
   status = 200
-
+  
+  from = "/ucapan"
+  to = "/pages/ucapan.html"
+  status = 200
