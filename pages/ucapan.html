@@ -61,15 +61,28 @@
     <p id="pesanUcapan"></p>
     <a href="idul-fitri.html" class="back-button">Kembali</a>
 </div>
-
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const nama = params.get("nama") || "Sahabat";
-    const pesan = params.get("pesan") || "Selamat Hari Raya Idul Fitri!";
     
-    document.getElementById("namaUcapan").innerText = "Dari: " + nama;
-    document.getElementById("pesanUcapan").innerText = `"${pesan}"`;
+<script>
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get("id");
+
+    if (id) {
+        let data = localStorage.getItem(id);
+        if (data) {
+            let { nama, pesan } = JSON.parse(data);
+            document.getElementById("namaUcapan").innerText = nama;
+            document.getElementById("pesanUcapan").innerText = pesan;
+        } else {
+            document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
+        }
+    }
+
+    // Tombol kembali ke idul-fitri.html
+    document.getElementById("btnBack").onclick = function() {
+        window.location.href = "idul-fitri.html?id=" + id;
+    };
 </script>
+
 
 </body>
 </html>
