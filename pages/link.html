@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link ke Ucapan Idul Fitri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #F6AEBC;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ucapan Idul Fitri Siap!</h1>
+    <p>Klik tombol di bawah untuk melihat halaman Idul Fitri.</p>
+    <a id="linkIdulFitri" class="button" href="#">Lihat Ucapan</a>
+</div>
+
+<script>
+    // Ambil data dari URL
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("nama");
+    const pesan = params.get("pesan");
+
+    // Buat link menuju idul-fitri.html dengan parameter
+    document.getElementById("linkIdulFitri").href = `idul-fitri.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+</script>
+
+</body>
+</html>
