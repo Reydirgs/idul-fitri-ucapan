@@ -62,13 +62,21 @@
 </div>
 
 <script>
-    const params = new URLSearchParams(window.location.search);
-    const nama = params.get("nama") || "Sahabat";
-    const pesan = params.get("pesan") || "Selamat Hari Raya Idul Fitri!";
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get("id");
 
-    // Setel link ke ucapan.html dengan parameter
-    document.getElementById("linkUcapan").href = `ucapan.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+    if (id) {
+        let data = localStorage.getItem(id);
+        if (data) {
+            let { nama, pesan } = JSON.parse(data);
+            document.getElementById("namaUcapan").innerText = nama;
+            document.getElementById("pesanUcapan").innerText = pesan;
+        } else {
+            document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
+        }
+    }
 </script>
+
 
 </body>
 </html>
