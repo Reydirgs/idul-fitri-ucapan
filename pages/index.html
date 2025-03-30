@@ -12,7 +12,7 @@
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
             text-shadow: 1px 1px 0px white;
-            background: url('public/eid-mubarak.jpg') no-repeat center center fixed;
+            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
             margin: 0;
@@ -75,7 +75,7 @@
         event.preventDefault();
         let nama = document.getElementById("nama").value;
         let pesan = document.getElementById("pesan").value;
-        window.location.href = `pages/ucapan.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+        window.location.href = `ucapan.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
     });
 </script>
 
