@@ -89,13 +89,24 @@
     document.getElementById("formUcapan").addEventListener("submit", async function(event) {
         event.preventDefault();
         
-        let nama = document.getElementById("nama").value;
-        let pesan = document.getElementById("pesan").value;
+        let nama = document.getElementById("nama").value.trim();
+        let pesan = document.getElementById("pesan").value.trim();
 
-        let docRef = await addDoc(collection(db, "ucapan"), { nama, pesan });
-        window.location.href = `link.html?id=${docRef.id}`;
+        if (!nama || !pesan) {
+            alert("Nama dan pesan tidak boleh kosong!");
+            return;
+        }
+
+        try {
+            let docRef = await addDoc(collection(db, "ucapan"), { nama, pesan });
+            window.location.href = `link.html?id=${docRef.id}`;
+        } catch (error) {
+            console.error("Error menambahkan dokumen:", error);
+            alert("Terjadi kesalahan, coba lagi!");
+        }
     });
 </script>
+
 
 </body>
 </html>
