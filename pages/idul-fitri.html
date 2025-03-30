@@ -66,13 +66,13 @@
     let id = params.get("id");
 
     if (id) {
-        // Perbaiki link agar mengarah ke ucapan.html dengan ID
         document.getElementById("linkUcapan").href = "ucapan.html?id=" + id;
     } else {
         document.getElementById("linkUcapan").innerText = "Ucapan Tidak Ditemukan!";
-        document.getElementById("linkUcapan").style.pointerEvents = "none"; // Nonaktifkan klik
+        document.getElementById("linkUcapan").style.pointerEvents = "none"; 
     }
 </script>
+
 
 </body>
 </html>
