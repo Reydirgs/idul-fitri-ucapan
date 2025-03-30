@@ -12,7 +12,7 @@
             font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
             text-shadow: 1px 1px 0px white;
-            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
+            background: url('eid-mubarak.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #F6AEBC;
             margin: 0;
@@ -30,6 +30,79 @@
             font-size: 3rem;
         }
         p {
-            font-size: 2rem;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            color: black;
         }
-        .button
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #F6AEBC;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .button:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Selamat Hari Raya Idul Fitri 1446 H</h1>
+    <p id="namaUcapan"></p>
+    <p id="pesanUcapan"></p>
+    <a href="ucapan.html?id=" id="tombolUcapan" class="button">Lihat Ucapan</a>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAjanAchqczl6WJ82IjnhjPJQWISkeGrRU",
+        authDomain: "ucapan-idul-fitri-2b695.firebaseapp.com",
+        projectId: "ucapan-idul-fitri-2b695",
+        storageBucket: "ucapan-idul-fitri-2b695.appspot.com",
+        messagingSenderId: "106321867541",
+        appId: "1:106321867541:web:f04fc522eeab02c13daf1c",
+        measurementId: "G-FP6ZY9T0GM"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get("id");
+
+    if (id) {
+        let docRef = doc(db, "ucapan", id);
+        getDoc(docRef).then((docSnap) => {
+            if (docSnap.exists()) {
+                let data = docSnap.data();
+                document.getElementById("namaUcapan").innerText = `Dari: ${data.nama}`;
+                document.getElementById("pesanUcapan").innerText = `"${data.pesan}"`;
+                document.getElementById("tombolUcapan").href = `ucapan.html?id=${id}`;
+            } else {
+                document.body.innerHTML = "<h1>Ucapan tidak ditemukan!</h1>";
+            }
+        }).catch((error) => {
+            console.error("Error mengambil dokumen:", error);
+            document.body.innerHTML = "<h1>Terjadi kesalahan, coba lagi!</h1>";
+        });
+    } else {
+        document.body.innerHTML = "<h1>ID tidak ditemukan!</h1>";
+    }
+</script>
+
+</body>
+</html>
