@@ -3,7 +3,8 @@
   publish = "pages"
 
 [[redirects]]
-  from = "/.netlify/functions/generatePage"
-  to = "/functions/generatePage.js"
+  from = "/api/generatePage"
+  to = "/.netlify/functions/generatePage"
   status = 200
+
 
