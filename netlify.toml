@@ -6,7 +6,8 @@
   from = "/"
   to = "/pages/index.html"
   status = 200
-  
+
+[[redirects]]
   from = "/ucapan"
   to = "/pages/ucapan.html"
   status = 200
