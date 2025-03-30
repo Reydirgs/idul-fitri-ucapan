@@ -3,50 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link ke Ucapan Idul Fitri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sue+Ellen+Francisco&display=swap" rel="stylesheet">
+    <title>Link Ucapan Idul Fitri</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Sue Ellen Francisco", cursive;
             text-align: center;
-            background-color: #f8f8f8;
+            text-shadow: 1px 1px 0px white;
+            background: url('/eid-mubarak.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #F6AEBC;
             margin: 0;
-            padding: 50px;
+            padding: 0;
         }
         .container {
-            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
         }
-        .button {
+        h1 {
+            font-size: 2.5rem;
+        }
+        p {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            word-break: break-word;
+        }
+        a {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            background-color: #F6AEBC;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            transition: 0.3s;
             display: inline-block;
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            color: white;
-            background-color: #F6AEBC;
-            text-decoration: none;
-            border-radius: 5px;
+        }
+        a:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 1);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Ucapan Idul Fitri Siap!</h1>
-    <p>Klik tombol di bawah untuk melihat halaman Idul Fitri.</p>
-    <a id="linkIdulFitri" class="button" href="#">Lihat Ucapan</a>
+    <h1>Berikut Link Ucapan Idul Fitri Anda</h1>
+    <p id="linkUcapan">Memuat link...</p>
 </div>
 
 <script>
-    // Ambil data dari URL
-    const params = new URLSearchParams(window.location.search);
-    const nama = params.get("nama");
-    const pesan = params.get("pesan");
+    // Ambil parameter dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const nama = urlParams.get("nama");
+    const pesan = urlParams.get("pesan");
 
-    // Buat link menuju idul-fitri.html dengan parameter
-    document.getElementById("linkIdulFitri").href = `idul-fitri.html?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+    // Buat link ke idul-fitri.html dengan parameter
+    const baseUrl = window.location.origin + "/idul-fitri.html";
+    const linkUcapan = `${baseUrl}?nama=${encodeURIComponent(nama)}&pesan=${encodeURIComponent(pesan)}`;
+
+    // Tampilkan link di halaman
+    document.getElementById("linkUcapan").innerHTML = `<a href="${linkUcapan}" target="_blank">${linkUcapan}</a>`;
 </script>
 
 </body>
