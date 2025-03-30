@@ -62,13 +62,11 @@
 </div>
 
 <script>
-    function getQueryParams() {
-        let params = new URLSearchParams(window.location.search);
-        let nama = params.get("nama") || "Anonymous";
-        let pesan = params.get("pesan") || "Selamat Idul Fitri!";
-        document.getElementById("ucapan").innerHTML = `<strong>${nama}</strong>: ${pesan}`;
-    }
-    getQueryParams();
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("nama") || "Sahabat";
+    const pesan = params.get("pesan") || "Selamat Hari Raya Idul Fitri!";
+    document.getElementById("namaUcapan").innerText = nama;
+    document.getElementById("pesanUcapan").innerText = pesan;
 </script>
 
 </body>
