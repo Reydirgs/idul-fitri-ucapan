@@ -79,14 +79,18 @@
 
         // Generate kode acak (6 karakter)
         let idAcak = Math.random().toString(36).substr(2, 6);
-        
+
         // Simpan data ke localStorage
         localStorage.setItem(idAcak, JSON.stringify({ nama, pesan }));
+
+        // Debugging: Pastikan data tersimpan
+        console.log("Data tersimpan:", localStorage.getItem(idAcak));
 
         // Redirect ke link.html dengan ID
         window.location.href = `link.html?id=${idAcak}`;
     });
 </script>
+
 
     
 </body>
